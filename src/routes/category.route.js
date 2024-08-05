@@ -1,0 +1,17 @@
+export const routeTypes = [
+    "top-airing",
+    "most-popular",
+    "most-favorite",
+    "completed",
+    "recently-updated",
+    "recently-added",
+    "top-upcoming",
+    "subbed-anime",
+    "dubbed-anime",
+    "top-upcoming",
+    "movie",
+    "special",
+    "ova",
+    "ona",
+    "tv",
+  ];
