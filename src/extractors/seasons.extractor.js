@@ -14,13 +14,20 @@ async function extractSeasons(id) {
         const data_id = parseInt(href.split("-").pop(), 10);
         let seasonSave = 1;
         let Season = seasonSave + data_number;
+        let ifmovie = ''
 
+        if(href.includes('type=movie')) {
+          ifmovie = href;
+          ifmovie.replace('/watch/', '')
+        }
+        
         const fullUrl = `${baseUrl}${href}`;
-
+        
         try {
          
           const response = await axios.get(fullUrl);
           const $episode = cheerio.load(response.data);
+
 
           const hrefEpisode = $episode('.seasons-block > #detail-ss-list > .detail-infor-content > .ss-list > a').first().attr('href');
           const hrefgetEpisode = hrefEpisode.replace('/watch/', '')
@@ -28,7 +35,7 @@ async function extractSeasons(id) {
           return { Season, data_number, data_id, hrefgetEpisode };
         } catch (error) {
           console.error(`Error fetching ${fullUrl}:`, error.message);
-          return { Season, data_number, data_id, hrefEpisode: null };
+          return { Season, data_number, data_id, hrefEpisode: null, ifmovie };
         }
       })
       .get();
