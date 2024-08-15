@@ -6,31 +6,17 @@ export async function decryptAllServers(serverData) {
   const promises = serverData.map(async (server) => {
     let decryptionPromises = [];
 
-    // Check if `server.embed` is not empty
     if (server.embed) {
-      // Add decryption promises to the array for all decryption functions
       decryptionPromises.push(
-        decryptSources_v1(
-          server.id,
-          server.name,
-          server.embed
-        ),
-        decryptSources_v2(
-          server.id,
-          server.name,
-          server.embed
-        ),
-        decryptSources_v3(
-          server.id,
-          server.name,
-          server.embed
-        )
+        decryptSources_v1(server.id, server.name, server.embed),
+        decryptSources_v2(server.id, server.name, server.embed),
+        decryptSources_v3(server.id, server.name, server.embed)
       );
     }
 
     if (decryptionPromises.length > 0) {
-      // Wait for all decryption promises to settle
       const results = await Promise.allSettled(decryptionPromises);
+      // console.log('Decryption Results:', results); 
       return { results };
     } else {
       return { error: "No valid decryption promise found" };
