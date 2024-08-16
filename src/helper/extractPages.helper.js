@@ -24,6 +24,7 @@ async function extractPage(page, params) {
           const title = $(".film-detail .film-name",element).text();
           const description = $(".film-detail .description",element).text().trim();
           const data_id = $(".film-poster>a",element).attr("data-id");
+          const hrefgetseason = $(".film-poster>a",element).attr("href").replace('/', '');
           const tvInfo = {
             showType: showType ? showType.text().trim() : "Unknown",
             duration: $(".film-detail .fd-infor .fdi-duration", element).text().trim(),
@@ -37,6 +38,7 @@ async function extractPage(page, params) {
           });
   
           return {
+            hrefgetseason,
             data_id,
             poster,
             title,
