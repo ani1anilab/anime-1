@@ -14,7 +14,7 @@ async function extractOtherEpisodes(id) {
     const elements = $(".seasons-block > #detail-ss-list > .detail-infor-content > .ss-list > a");
     
     const episodes = elements.map((index, element) => {
-      const hrefdataid = $(element).attr("href").replace('/watch', '')
+      const hrefdataid = $(element).attr("href").replace('/watch/', '')
       const title = $(element).attr("title");
       const episode_no = $(element).attr("data-number");
       const data_id = $(element).attr("data-id");
